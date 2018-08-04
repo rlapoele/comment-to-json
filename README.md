@@ -34,18 +34,18 @@ At present, each generated file is formatted as a object array where object as f
 ```json
 [
   {
-    comment: [
-      'comment line 1',
-      'comment line 2, etc...',
-      '@description Media Object'
+    "comment": [
+      "comment line 1",
+      "comment line 2, etc...",
+      "@description Media Object"
     ],
-    annotations: {
-      name: 'description',
-      content: [
-        'Media Object'
+    "annotations": {
+      "name": "description",
+      "content": [
+        "Media Object"
       ],
-      commentLineStart: 2,
-      commentLineEnd: 2
+      "commentLineStart": 2,
+      "commentLineEnd": 2
     }
   }
 ]
