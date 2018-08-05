@@ -30,7 +30,7 @@ function commentFileWriter(comments, commentsDestinationFilePath, keepAllComment
         JSON.stringify(filteredComments, null, 2),
         function (err) {
           if (err) {
-            console.log(chalk.red(chalk.bold(err)));
+            console.error(err);
           }
           else {
             const commentLabel = `${!keepAllComments?'annotated':''} comment${filteredComments.length>1?'s':''}`;

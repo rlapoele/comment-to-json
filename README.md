@@ -59,7 +59,7 @@ Input:
 Ouput:
 ```json
 [{
-  "comment": [ "*Line 0", "Line 1", "Line 2"],
+  "comment": [ "Line 0", "Line 1", "Line 2"],
   "annotations": []
 }]
 ```
