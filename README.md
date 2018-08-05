@@ -25,6 +25,44 @@ Usage: comment-to-json sourceFilePath [targetFilePath] [option]
 ```
 
 ## Comments format
+comment-to-jon can only detect and process comments delimited by `/*` and `*/` such as follows:
+```css
+
+/*
+A Media Object...
+@name Media Object
+@cssClass .media
+@description Media object
+ */
+.media, .media__fig, .media__body {
+  box-sizing: border-box;
+} 
+.media {
+  display: flex;
+}
+.media__fig {
+  flex: 0 0 auto;
+}
+.media__body {
+  flex: 1 1 auto;
+}
+```
+Currently, any `*` characters prefixed by 0 to any number of space characters found at the beginning of a line within a comment block are stripped out.
+### Example 1
+Input:
+```
+/**Line 0
+ *Line 1
+ *Line 2
+ */
+```
+Ouput:
+```json
+[{
+  "comment": [ "*Line 0", "Line 1", "Line 2"],
+  "annotations": []
+}]
+```
 
 ## Annotation format
 
