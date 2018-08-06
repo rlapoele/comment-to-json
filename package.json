@@ -7,10 +7,6 @@
     "type": "git",
     "url": "https://github:rlapoele/comment-to-json.git"
   },
-  "files": [
-    "LICENSE.md",
-    "index.js"
-  ],
   "author": {
     "name": "Renaud Lapoële",
     "email": "rlapoele@gmail.com"
