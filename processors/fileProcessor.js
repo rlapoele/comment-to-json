@@ -41,7 +41,7 @@ function fileProcessor(source, destination, keepAllComments) {
             }
             else {
               const destinationDirectoryName = path.join(currentDirectory,path.dirname(pathHasExtension(destination)?path.join(destination,'ignored'):('**' === path.dirname(destination))?'':destination));
-              const destinationFileName = ('*'===basename(destination))?`${basename(sourceFilePath)}.json`:`${basename(destination)}.json`;
+              const destinationFileName = ('*' === basename(destination))?`${basename(sourceFilePath)}.json`:`${basename(destination)}.json`;
               const destinationFilePath = files.length === 1 ? path.join(destinationDirectoryName, destinationFileName): path.join(path.dirname(pathHasExtension(sourceFilePath)?path.join(sourceFilePath,'ignored'):sourceFilePath), `${basename(sourceFilePath)}.json`);
     
               console.log(`Processing "${chalk.blue(sourceFilePath)}"...`);
@@ -58,7 +58,7 @@ function fileProcessor(source, destination, keepAllComments) {
     
               const comments = [];
               rl.on('line', parseComments(comments, constants.COMMENT_START_TAG, constants.COMMENT_END_TAG, constants.ANNOTATION_BLOCK_TAG));
-              rl.on('close', saveComments(comments, destinationFilePath, keepAllComments));
+              rl.on('close', saveComments(comments, sourceFilePath, destinationFilePath, keepAllComments));
             }
 
           }
