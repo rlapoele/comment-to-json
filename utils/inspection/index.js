@@ -8,7 +8,7 @@
 
 /**
  * Checks whether a value is a string.
- * @param {any} string - can be any type really...
+ * @param {*} string
  * @returns {boolean}
  */
 function isString(string) { return 'string' === typeof string }
@@ -16,7 +16,7 @@ function isString(string) { return 'string' === typeof string }
 
 /**
  * Checks whether a value is an array.
- * @param {any} array - can be any type really...
+ * @param {*} array
  * @returns {boolean}
  */
 function isArray(array)   { return Array.isArray(array) }

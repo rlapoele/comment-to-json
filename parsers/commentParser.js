@@ -1,7 +1,20 @@
 'use strict';
+/**
+ * A comment parser module
+ * @module parsers/commentParser
+ */
 
 const parseAnnotation = require('./annotationParser');
 
+/**
+ * Wraps a comment accumulator & a comment parser function. Gets imported by
+ * module(s) interested in parsing text from file being streamed.
+ * @param comments {array}
+ * @param commentStartTag {string}
+ * @param commentEndTag {string}
+ * @param annotationBlockTag {string}
+ * @returns sourceLineParser {function}
+ */
 function commentParser(comments, commentStartTag, commentEndTag, annotationBlockTag) {
   let commentCaptureIsOn  = false;
   let currentComment      = '';

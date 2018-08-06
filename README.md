@@ -4,10 +4,19 @@ A small utility to parse any kind of text file(s), extract its comments and rela
 This small library has been initially created to help maintain a living styleguide.
 
 ## Installation
+To use comment-to-json as development dependency with...
+#### Yarn
+```
+yarn add -D comment-to-json
+```
+#### Npm
+```
+npm install comment-to-json --save-dev
+```
 
 ## Usage
 ```
-Usage: comment-to-json sourceFilePath [targetFilePath] [option]
+comment-to-json sourceFilePath [targetFilePath] [option]
   
   sourceFilePath:  path to commented file(s) including name or name pattern.
   (required)       - accept quoted glob patterns (i.e. '*.css' or '**/*.css')
@@ -28,12 +37,13 @@ Usage: comment-to-json sourceFilePath [targetFilePath] [option]
 comment-to-jon can only detect and process comments delimited by `/*` and `*/` such as follows:
 ```css
 
-/*
-A Media Object...
-@name Media Object
-@cssClass .media
-@description Media object
+/**
+ * A Media Object...
+ * @name Media Object
+ * @cssClass .media
+ * @description Media object
  */
+ 
 .media, .media__fig, .media__body {
   box-sizing: border-box;
 } 
@@ -47,44 +57,97 @@ A Media Object...
   flex: 1 1 auto;
 }
 ```
-Currently, any `*` characters prefixed by 0 to any number of space characters found at the beginning of a line within a comment block are stripped out.
-### Example 1
+Currently, any `*` characters prefixed by 0 to any number of space characters found at the beginning of a comment block line are stripped out.
+#### Example
 Input:
 ```
-/**Line 0
- *Line 1
- *Line 2
+/**
+ * A Media Object...
+ * @name Media Object
+ * @cssClass .media
+ * @description
+ *   Media object...
  */
-```
-Ouput:
-```json
-[{
-  "comment": [ "Line 0", "Line 1", "Line 2"],
-  "annotations": []
-}]
-```
+ 
+...
 
-## Annotation format
+/* Just a simple single line comment without annotation */
 
-## Output format
-Parsed comments and annotations are saved in one or more .json file(s).
-At present, each generated file is formatted as a object array where object as formatted like this:
+...
+
+```
+Output (annotations have been stripped out below to simply the example):
 ```json
 [
   {
     "comment": [
-      "comment line 1",
-      "comment line 2, etc...",
-      "@description Media Object"
+      "A Media Object...",
+      "@name Media Object",
+      "@cssClass .media",
+      "@description",
+      "Media object..."
+    ]
+  },
+  {
+    "comment": [
+      "Just a simple single line comment without annotation"
+    ]
+  }
+]
+```
+**Note:** By default, only annotated comments are kept and saved in the output.
+Use the `--a` option if you are interested in capturing all comments. 
+
+## Annotation format
+In comments, an annotation must be placed at the beginning of a line and start with the character `@`.
+Any other characters located between `@` and the next ` ` (space) or the EOL is considered to be the name of the annotation.
+Annotation content starts after the annotation name and ends with either the next annotation name or the end of the comment block.
+## Output format
+Parsed comments and annotations are saved in one or more .json file(s).
+At present, each generated file is formatted as an object array where objects as formatted like this:
+```json
+[
+  {
+    "comment": [
+      "A Media Object...",
+      "@name Media Object",
+      "@cssClass .media",
+      "@description",
+      "Media object..."
     ],
-    "annotations": {
-      "name": "description",
-      "content": [
-        "Media Object"
-      ],
-      "commentLineStart": 2,
-      "commentLineEnd": 2
-    }
+    "annotations": [
+      {
+        "name": "name",
+        "content": [
+          "Media Object"
+        ],
+        "contentIndexStart": 1,
+        "contentColumnStart": 6,
+        "contentIndexEnd": 1
+      },
+      {
+        "name": "cssClass",
+        "content": [
+          ".media"
+        ],
+        "contentIndexStart": 2,
+        "contentIndexEnd": 2
+      },
+      {
+        "name": "description",
+        "content": [
+          "Media object..."
+        ],
+        "contentIndexStart": 4,
+        "contentIndexEnd": 4
+      }
+    ]
+  },
+  {
+    "comment": [
+      "Just a simple single line comment without annotation"
+    ],
+    "annotations": []
   }
 ]
 ```
