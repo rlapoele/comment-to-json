@@ -40,8 +40,8 @@ function fileProcessor(source, destination, keepAllComments) {
               console.log(chalk.red(`Could not find "${sourceFilePath}".`));
             }
             else {
-              const destinationDirectoryName = path.join(currentDirectory,path.dirname(pathHasExtension(destination)?path.join(destination,'ignored'):destination));
-              const destinationFileName = `${basename(destination)}.json`;
+              const destinationDirectoryName = path.join(currentDirectory,path.dirname(pathHasExtension(destination)?path.join(destination,'ignored'):('**' === path.dirname(destination))?'':destination));
+              const destinationFileName = ('*'===basename(destination))?`${basename(sourceFilePath)}.json`:`${basename(destination)}.json`;
               const destinationFilePath = files.length === 1 ? path.join(destinationDirectoryName, destinationFileName): path.join(path.dirname(pathHasExtension(sourceFilePath)?path.join(sourceFilePath,'ignored'):sourceFilePath), `${basename(sourceFilePath)}.json`);
     
               console.log(`Processing "${chalk.blue(sourceFilePath)}"...`);
