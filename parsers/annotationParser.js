@@ -25,19 +25,23 @@ const isArray = utilsInspection.isArray;
  */
 function annotationParser(commentLineArray, annotationBlockTag) {
   let annotations = [];
-  let annotationName = '';
-  let annotationContentArray = [];
   
   if(commentLineArray && isArray(commentLineArray) && isString(annotationBlockTag)) {
+    let annotationName = '';
+    let annotationContentArray = [];
     let arrayIndex = 0;
     let spaceIndex = -1;
     let annotationContentColStartIndex = -1;
     let line = '';
     let commentLineCount = arrayIndex;
     
+    /* While we have comment lines to process... */
     while (arrayIndex < commentLineArray.length) {
+      
+      /* Let's make a soft copy of the current line of text. */
       line = commentLineArray[arrayIndex];
       
+      /* does the current line start with a '@'? */
       if (line.startsWith(annotationBlockTag)) {
         if ('' !== annotationName) {
           if (-1 === annotationContentColStartIndex) {
@@ -72,9 +76,7 @@ function annotationParser(commentLineArray, annotationBlockTag) {
         if (-1 < spaceIndex) {
           annotationName = line.slice(1, spaceIndex);
           annotationContentArray.push(line.slice(spaceIndex + 1,line.length));
-          if (line.length > spaceIndex + 3 + annotationName.length) {
-            annotationContentColStartIndex = spaceIndex + 1;
-          }
+          annotationContentColStartIndex = spaceIndex + 1;
         }
         else {
           annotationName = line.slice(1, line.length);
