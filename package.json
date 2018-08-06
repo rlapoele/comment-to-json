@@ -12,7 +12,8 @@
     "index.js"
   ],
   "author": {
-    "name": "Renaud Lapoële"
+    "name": "Renaud Lapoële",
+    "email": "rlapoele@gmail.com"
   },
   "dependencies": {
     "chalk": "^2.4.1",
