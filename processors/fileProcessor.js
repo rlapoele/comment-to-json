@@ -13,6 +13,7 @@ const readline         = require('readline');
 const parseComments    = require('../parsers/commentParser');
 const saveComments     = require('../writers/commentFileWriter');
 const basename         = require('../utils/path/index').basename;
+const pathHasExtension = require('../utils/path/index').pathHasExtension;
 const constants        = require('../constants');
 const currentDirectory = process.cwd();
 
@@ -38,8 +39,8 @@ function fileProcessor(source, destination, keepAllComments) {
               console.log(chalk.red(`Could not find "${sourceFilePath}".`));
             }
             else {
-              let destinationDirname = path.dirname(destination);
-              let destinationFilename = basename(destination);
+              let destinationDirname = pathHasExtension(destination) ? path.dirname(destination) : path.dirname(path.join(destination,'dummy'));
+              let destinationFilename = pathHasExtension(destination) ? basename(destination) : basename(sourceFilePath);
               let destinationExtname = '.json';
   
               destinationDirname  = '**' === destinationDirname ? '' : destinationDirname;

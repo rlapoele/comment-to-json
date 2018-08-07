@@ -19,12 +19,12 @@ function basename(filePath) {
 
 
 /**
- * Checks whether a file path contains an extension.
+ * Returns true if the filePath has an extension.
  * @param filePath
  * @returns {boolean}
  */
 function pathHasExtension(filePath) {
-  return '' === path.extname(filePath);
+  return '' !== path.extname(filePath);
 }
 
 module.exports = { basename, pathHasExtension };

@@ -1,5 +1,10 @@
 # CHANGE LOG
 
+### Release 1.0.6
+- Bug Fixes:
+  - pathHasExtension path utility function was returning true when a file path didn't have an extension and vice-et-versa.
+  - when a target directory path was passed as argument, its last directory was ignored.
+
 ### Release 1.0.5
 - CHANGELOG.md release headings made smaller.
 - Bug Fixes:
