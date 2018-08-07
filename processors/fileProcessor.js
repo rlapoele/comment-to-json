@@ -12,9 +12,7 @@ const chalk            = require('chalk');
 const readline         = require('readline');
 const parseComments    = require('../parsers/commentParser');
 const saveComments     = require('../writers/commentFileWriter');
-const pathUtils        = require('../utils/path/index');
-const basename         = pathUtils.basename;
-const pathHasExtension = pathUtils.pathHasExtension;
+const basename         = require('../utils/path/index').basename;
 const constants        = require('../constants');
 const currentDirectory = process.cwd();
 
@@ -40,13 +38,20 @@ function fileProcessor(source, destination, keepAllComments) {
               console.log(chalk.red(`Could not find "${sourceFilePath}".`));
             }
             else {
-              const destinationDirectoryName = path.join(currentDirectory,path.dirname(pathHasExtension(destination)?path.join(destination,'ignored'):('**' === path.dirname(destination))?'':destination));
-              const destinationFileName = ('*' === basename(destination))?`${basename(sourceFilePath)}.json`:`${basename(destination)}.json`;
-              const destinationFilePath = files.length === 1 ? path.join(destinationDirectoryName, destinationFileName): path.join(path.dirname(pathHasExtension(sourceFilePath)?path.join(sourceFilePath,'ignored'):sourceFilePath), `${basename(sourceFilePath)}.json`);
-    
+              let destinationDirname = path.dirname(destination);
+              let destinationFilename = basename(destination);
+              let destinationExtname = '.json';
+  
+              destinationDirname  = '**' === destinationDirname ? '' : destinationDirname;
+              destinationDirname  = path.join(currentDirectory, destinationDirname);
+              destinationFilename = '*' === destinationFilename ? basename(sourceFilePath) : destinationFilename;
+              destinationFilename = 1 < files.length ? basename(sourceFilePath) : destinationFilename;
+  
+              let destinationFilepath = path.join(destinationDirname, `${destinationFilename}${destinationExtname}`);
+  
               console.log(`Processing "${chalk.blue(sourceFilePath)}"...`);
               const fileReadStream = fs.createReadStream(sourceFilePath);
-    
+  
               const rl =
                 readline.createInterface(
                   {
@@ -55,12 +60,12 @@ function fileProcessor(source, destination, keepAllComments) {
                     terminal: false,
                   }
                 );
-    
+  
               const comments = [];
+  
               rl.on('line', parseComments(comments, constants.COMMENT_START_TAG, constants.COMMENT_END_TAG, constants.ANNOTATION_BLOCK_TAG));
-              rl.on('close', saveComments(comments, sourceFilePath, destinationFilePath, keepAllComments));
+              rl.on('close', saveComments(comments, sourceFilePath, destinationFilepath, keepAllComments));
             }
-
           }
         );
       }
