@@ -18,14 +18,20 @@ npm install comment-to-json --save-dev
 ```
 comment-to-json sourceFilePath [targetFilePath] [option]
   
-  sourceFilePath:  path to commented file(s) including name or name pattern.
-  (required)       - accept quoted glob patterns (i.e. '*.css' or '**/*.css')
+  sourceFilePath:  path to commented file(s) incl. name or name pattern.
+  (required)       - accept individual specific file name or quoted glob
+                     patterns (i.e. '*.css' or '**/*.css').
   
   targetFilePath:  target file path.
-  (optional)       - applies only when sourceFilePath is not a glob.
-                   - when not specified, the generated files will be in the
-                     same location as the source files and will have the same
-                     name followed by a ".json" extension.
+  (optional)       - if specified, the target filename (excluding the ext.) is
+                     used if the sourceFilePath points to 1 file otherwise, it
+                     is ignored and sourceFilePath file names are used instead.
+                   - if specified, the target directory(ies) is(are) always
+                     used.
+                   - if not specified, the generated files inherit source
+                     files path & names.
+                   - in all cases, the target file extension is ignored and a
+                     '.json' extension is used.
                      
   option:
     --h : show usage.

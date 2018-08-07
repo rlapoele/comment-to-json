@@ -1,5 +1,8 @@
 # CHANGE LOG
 
+### Release 1.0.7
+- README.md updated to reflect latest "usage"...
+
 ### Release 1.0.6
 - Bug Fixes:
   - pathHasExtension path utility function was returning true when a file path didn't have an extension and vice-et-versa.
