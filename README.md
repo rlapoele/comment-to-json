@@ -73,6 +73,7 @@ Input:
  * @cssClass .media
  * @description
  *   Media object...
+ *   @@ignoredAnnotation...
  */
  
 ...
@@ -91,7 +92,8 @@ Output (annotations have been stripped out below to simply the example):
       "@name Media Object",
       "@cssClass .media",
       "@description",
-      "Media object..."
+      "Media object...",
+      "@@ignoredAnnotation..."
     ]
   },
   {
@@ -108,6 +110,9 @@ Use the `--a` option if you are interested in capturing all comments.
 In comments, an annotation must be placed at the beginning of a line and start with the character `@`.
 Any other characters located between `@` and the next ` ` (space) or the EOL is considered to be the name of the annotation.
 Annotation content starts after the annotation name and ends with either the next annotation name or the end of the comment block.
+
+**New in v1.1.0:** annotation starting with `@@` are ignored.
+
 ## Output format
 Parsed comments and annotations are saved in one or more .json file(s).
 At present, each generated file is formatted as an object array where objects as formatted like this:
@@ -119,7 +124,8 @@ At present, each generated file is formatted as an object array where objects as
       "@name Media Object",
       "@cssClass .media",
       "@description",
-      "Media object..."
+      "Media object...",
+      "@@ignoredAnnotation..."
     ],
     "annotations": [
       {
@@ -142,10 +148,11 @@ At present, each generated file is formatted as an object array where objects as
       {
         "name": "description",
         "content": [
-          "Media object..."
+          "Media object...",
+          "@@ignoredAnnotation..."
         ],
         "contentIndexStart": 4,
-        "contentIndexEnd": 4
+        "contentIndexEnd": 5
       }
     ]
   },

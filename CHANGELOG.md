@@ -1,5 +1,11 @@
 # CHANGE LOG
 
+### Release 1.1.0
+- README.md updated to reflect latest "usage".
+- js code moved under a new "lib" directory.
+- New Feature:
+  - it is now possible to mask annotations by prefixing it with an extra `@` character. In other words, comment lines starting (ignoring the possible "*", " *", etc...) with "@@blablabla" will not generate any "blablabla" annotation.
+
 ### Release 1.0.7
 - README.md updated to reflect latest "usage"...
 
