@@ -1,6 +1,6 @@
 {
   "name": "comment-to-json",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
@@ -11,8 +11,8 @@
     "name": "Renaud Lapoële",
     "email": "rlapoele@gmail.com"
   },
-  "homepage": "https://github:rlapoele/comment-to-json#readme",
-  "issues": "https://github:rlapoele/comment-to-json/issues",
+  "homepage": "https://github/rlapoele/comment-to-json#readme",
+  "issues": "https://github/rlapoele/comment-to-json/issues",
   "dependencies": {
     "chalk": "^2.4.1",
     "glob": "^7.1.2",
