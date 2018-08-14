@@ -1,5 +1,15 @@
 # CHANGE LOG
 
+### Release 1.1.3
+- Minor enhancement:
+  - parameterized annotation escape tag/marker.
+
+### Release 1.1.2
+- More minor updates to package.json
+
+### Release 1.1.1
+- Minor updates to package.json
+
 ### Release 1.1.0
 - README.md updated to reflect latest "usage".
 - js code moved under a new "lib" directory.
