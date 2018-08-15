@@ -1,5 +1,10 @@
 # CHANGE LOG
 
+### Release 1.1.5
+- Further cleanups:
+  - README.md updates to have npm info reflect at the top of the "page".
+  - package.json updates (keywords, description)
+
 ### Release 1.1.4
 - Cleanups:
   - Small corrections in the README.md file.

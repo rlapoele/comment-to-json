@@ -1,4 +1,12 @@
-# COMMENT TO JSON
+# COMMENT-TO-JSON
+<p>
+  <a href="https://npmcharts.com/compare/comment-to-json?minimal=true"><img src="https://img.shields.io/npm/dm/comment-to-json.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/comment-to-json"><img src="https://img.shields.io/npm/v/comment-to-json.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/comment-to-json"><img src="https://img.shields.io/npm/l/comment-to-json.svg" alt="License"></a>
+</p>
+
+> A code source comment to json converter.
+
 A small utility to parse any kind of text file(s), extract its comments and related annotation(s) and save it as .json files.
 
 This library has initially been created to help maintain living styleguides.
@@ -93,7 +101,9 @@ In addition, text portions located between `*` (` *`, `  *`, etc...) and the EOL
 
 ```
 ##### Output
+
 **Note:** annotations have been stripped out from the example below to keep things simpler here:
+
 ```json
 [
   {
@@ -113,7 +123,9 @@ In addition, text portions located between `*` (` *`, `  *`, etc...) and the EOL
   }
 ]
 ```
+
 **Note:** By default, only annotated comments are kept and saved in the output.
+
 Use the `--a` option if you are interested in capturing all comments. 
 
 ## Annotation format
@@ -123,14 +135,19 @@ Any other characters located between `@` and the next ` ` (space) or the EOL if 
 
 Annotation content starts after the annotation name and ends with either the _next_ annotation name or the end of the comment block.
 
+
 **New in v1.1.0:**
-Annotation starting with `@@` are ignored (considered as pure comment or as part of the content of a _previous_ annotation).
+
+Annotations starting with `@@` are ignored and therefore considered as either pure comment or as a part of the content of a _previous_ annotation.
+
+In the later case, the first `@` is stripped out from the text added to the corresponding annotation content.
 
 In the **Output format** section below, see what happens to "@@ignoredAnnotation...".
 
 ## Output format
 Parsed comments and annotations are saved in one or more .json file(s).
 At present, each generated file is formatted as an object array where objects as formatted like this:
+
 ```json
 [
   {

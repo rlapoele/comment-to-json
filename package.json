@@ -1,6 +1,6 @@
 {
   "name": "comment-to-json",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
@@ -11,6 +11,8 @@
     "name": "Renaud Lapoële",
     "email": "rlapoele@gmail.com"
   },
+  "description": "A code source comment to json converter.",
+  "keywords": ["source","code","comments","comment","json","converter","parser"],
   "homepage": "https://github.com/rlapoele/comment-to-json#readme",
   "issues": "https://github.com/rlapoele/comment-to-json/issues",
   "dependencies": {
