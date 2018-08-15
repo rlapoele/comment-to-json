@@ -1,10 +1,10 @@
 # COMMENT TO JSON
 A small utility to parse any kind of text file(s), extract its comments and related annotation(s) and save it as .json files.
 
-This small library has been initially created to help maintain a living styleguide.
+This library has initially been created to help maintain living styleguides.
 
 ## Installation
-To use comment-to-json as development dependency with...
+To use _comment-to-json_ as development dependency with...
 #### Yarn
 ```
 yarn add -D comment-to-json
@@ -40,7 +40,13 @@ comment-to-json sourceFilePath [targetFilePath] [option]
 ```
 
 ## Comments format
-comment-to-jon can only detect and process comments delimited by `/*` and `*/` such as follows:
+_comment-to-jon_ can only detect and process comments delimited by `/*` (comment start tag or marker) and `*/` (comment end tag).
+
+Comments can be on a single line or on multiple.
+
+The comment start and end tags are removed from the captured comments.
+
+#### Example
 ```css
 
 /**
@@ -63,9 +69,12 @@ comment-to-jon can only detect and process comments delimited by `/*` and `*/` s
   flex: 1 1 auto;
 }
 ```
+
 Currently, any `*` characters prefixed by 0 to any number of space characters found at the beginning of a comment block line are stripped out.
+In addition, text portions located between `*` (` *`, `  *`, etc...) and the EOL are trimmed left and right.
+
 #### Example
-Input:
+##### Input:
 ```
 /**
  * A Media Object...
@@ -83,7 +92,8 @@ Input:
 ...
 
 ```
-Output (annotations have been stripped out below to simply the example):
+##### Output
+**Note:** annotations have been stripped out from the example below to keep things simpler here:
 ```json
 [
   {
@@ -107,11 +117,16 @@ Output (annotations have been stripped out below to simply the example):
 Use the `--a` option if you are interested in capturing all comments. 
 
 ## Annotation format
-In comments, an annotation must be placed at the beginning of a line and start with the character `@`.
-Any other characters located between `@` and the next ` ` (space) or the EOL is considered to be the name of the annotation.
-Annotation content starts after the annotation name and ends with either the next annotation name or the end of the comment block.
+In comments, an annotation must be placed at the beginning of a line and must start with the character `@`.
 
-**New in v1.1.0:** annotation starting with `@@` are ignored.
+Any other characters located between `@` and the next ` ` (space) or the EOL if no space are found, are considered to be the name of the annotation.
+
+Annotation content starts after the annotation name and ends with either the _next_ annotation name or the end of the comment block.
+
+**New in v1.1.0:**
+Annotation starting with `@@` are ignored (considered as pure comment or as part of the content of a _previous_ annotation).
+
+In the **Output format** section below, see what happens to "@@ignoredAnnotation...".
 
 ## Output format
 Parsed comments and annotations are saved in one or more .json file(s).
@@ -149,7 +164,7 @@ At present, each generated file is formatted as an object array where objects as
         "name": "description",
         "content": [
           "Media object...",
-          "@@ignoredAnnotation..."
+          "@ignoredAnnotation..."
         ],
         "contentIndexStart": 4,
         "contentIndexEnd": 5
@@ -164,4 +179,3 @@ At present, each generated file is formatted as an object array where objects as
   }
 ]
 ```
-

@@ -1,5 +1,10 @@
 # CHANGE LOG
 
+### Release 1.1.4
+- Cleanups:
+  - Small corrections in the README.md file.
+  - Modification around the package.json repository url format (to enable proper linking from npm to github)
+
 ### Release 1.1.3
 - Minor enhancement:
   - parameterized annotation escape tag/marker.
